@@ -24,7 +24,7 @@ private:
 public:
     Team(Character* player);
 
-    virtual ~Team();
+    virtual ~Team(){cout<< "good dis to team" << endl;}
 
     void add(Character* player);
     virtual void attack(Team* other_team);
@@ -36,9 +36,12 @@ public:
     string get_leader();
 
 
-    ////
-    int get_sizeTeam(){
-        return _chTeam.size();
-    }
+
+    Team(const Team&) = delete;
+    Team& operator=(const Team&) = delete;
+    Team(Team&&) = delete;
+    Team& operator=(Team&&) = delete;
+
+
 };
 #endif

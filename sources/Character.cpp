@@ -70,3 +70,8 @@ int Character::get_hitPoints()
 {
     return _hitPoints;
 }
+
+
+void Character::set_location(const Point& new_point){
+    _location = new_point;
+}

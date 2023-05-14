@@ -3,16 +3,18 @@
 
 Team::Team(Character *player) : _leader(player)
 {
+    cout << "my problem1" << endl;
     add(player);
 }
 
 void Team::add(Character *player)
 {
-    if (_chTeam.size() <= 10)
+
+    if (_chTeam.size() >= 10)
     {
-        _chTeam.push_back(player);  
+        throw std::runtime_error("A team can have at most 10 teammates");
     }
-    throw std::runtime_error("A team can have at most 10 teammates");
+    _chTeam.push_back(player);  
 }
 void Team::attack(Team *other_team)
 {
@@ -69,6 +71,6 @@ string Team::get_leader()
     return _leader->getName();
 }
 
-Team::~Team(){
-    cout << "bar "<< endl;
-}
+// Team::~Team(){
+//     cout << "bar "<< endl;
+// }

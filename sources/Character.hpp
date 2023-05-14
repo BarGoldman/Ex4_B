@@ -10,7 +10,7 @@ namespace ariel
 
 class Character
 {
-protected:
+private:
     string _name;
     Point _location;
     int _hitPoints;
@@ -19,6 +19,7 @@ protected:
 
 public:
     Character(string name, Point location, int hit, int type);
+    // ~Character(){cout<< "good dis to Character" << endl;}
 
     bool isAlive();
     double distance(Character *player);
@@ -29,6 +30,8 @@ public:
 
     //// add by me
     int get_hitPoints();
+
+    void set_location(const Point& new_point);
 };
 
 #endif

@@ -11,7 +11,8 @@ Ninja::Ninja(string name, Point location,int hit ,int speed):Character(name, loc
 
 void Ninja::move(Character* enemy)
 {
-    _location = Point::moveTowards(_location,enemy->getLocation(),_speed);
+    Point new_p = Point::moveTowards(getLocation(),enemy->getLocation(),_speed);
+    set_location(new_p);
 }
 
 void Ninja::slash(Character *enemy)
