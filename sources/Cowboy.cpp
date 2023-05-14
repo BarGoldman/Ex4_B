@@ -4,14 +4,22 @@
 #include "Cowboy.hpp"
 using namespace ariel;
 
-Cowboy::Cowboy(string name, Point location) : Character(name, location, 110,2), _numBalls(6)
+Cowboy::Cowboy(string name, Point location) : Character(name, location, 110, 2), _numBalls(6)
 {
-
 }
 
-void Cowboy::shoot(Character* enemy)
+void Cowboy::shoot(Character *enemy)
 {
-    if(isAlive() && _numBalls > 0 ){
+    if (!(enemy->isAlive()) || !(isAlive()))
+    {
+        throw std::runtime_error("Attacking a dead character");
+    }
+    if (enemy == &(*this))
+    {
+        throw std::runtime_error("No self harm");
+    }
+    if (isAlive() && _numBalls > 0)
+    {
         enemy->hit(10);
         _numBalls = _numBalls - 1;
     }
@@ -22,12 +30,14 @@ bool Cowboy::hasboolets()
 }
 void Cowboy::reload()
 {
-    _numBalls = 6 ; 
+    if (!(isAlive()))
+    {
+        throw std::runtime_error("Dead cowboy can not reload");
+    }
+    _numBalls = 6;
 }
 
-
-int Cowboy::get_numBalls(){
+int Cowboy::get_numBalls()
+{
     return _numBalls;
 }
-
-

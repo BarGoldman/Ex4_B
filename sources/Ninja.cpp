@@ -14,12 +14,19 @@ void Ninja::move(Character* enemy)
     _location = Point::moveTowards(_location,enemy->getLocation(),_speed);
 }
 
-void Ninja::slash(Character* enemy)
+void Ninja::slash(Character *enemy)
 {
-    if(isAlive() && this->distance(enemy) < 1){
+    if(!(enemy->isAlive()) || !(isAlive())){
+        throw std::runtime_error("Attacking a dead character");
+    }
+    if (enemy == &(*this))
+    {
+        throw std::runtime_error("No self harm");
+    }
+    if (this->distance(enemy) < 1)
+    {
         enemy->hit(40);
     }
-
 }
 
 int Ninja::get_speed(){
