@@ -34,5 +34,11 @@ public:
 
 
     string get_leader();
+
+
+    ////
+    int get_sizeTeam(){
+        return _chTeam.size();
+    }
 };
 #endif

@@ -20,6 +20,9 @@ double Character::distance(Character *player)
 
 void Character::hit(int num)
 {
+    if(num < 0 ){
+        throw std::invalid_argument("num is negative value");
+    }
     if (_hitPoints - num < 0)
     {
         _hitPoints = 0;
