@@ -19,8 +19,10 @@ namespace ariel
 class Team
 {
 private:
+    
     vector<Character* > _chTeam;
     Character* _leader;
+
 public:
     Team(Character* player);
 
@@ -29,11 +31,13 @@ public:
     void add(Character* player);
     virtual void attack(Team* other_team);
     int stillAlive();
-    virtual void print() const  ;
+    virtual void print() const;
 
 
+    //////////// add by me
+    Character* get_leader();
+    virtual vector<Character* > sort_team(vector<Character* > team);
 
-    string get_leader();
 
 
 

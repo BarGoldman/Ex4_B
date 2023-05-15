@@ -47,6 +47,13 @@ int main() {
    //      team_B.print();
    //   }
 
+
+
+      cout << "bar test: ------------------------------------" << endl;
+      cout << "int team A live: " << team_A.stillAlive() << endl;
+
+      cout << "bar test: ------------------------------------" << endl;
+
      if (team_A.stillAlive() > 0) cout << "winner is team_A" << endl;
      else cout << "winner is team_B" << endl;
 
