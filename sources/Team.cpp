@@ -67,23 +67,31 @@ void Team::attack(Team *other_team)
 
     for (size_t i = 0; i < _chTeam.size(); i++)
     {
-        if (!(target->isAlive()))
-        {
-            target = new_target(other_team);
-        }
         if (other_team->stillAlive() < 1 || stillAlive() < 1)
         {
             break;
         }
+        cout << "target->getName(): " << target->getName() << endl;
+        if (!(target->isAlive()))
+        {
+            cout << "hiiiii bar" << endl;
+            target = new_target(other_team);
+        }
+
         if (_chTeam.at(i)->isAlive())
         {
+            cout << "i " << i << endl;
+            cout << "ch " << _chTeam.at(i)->isAlive() << endl;
+            cout << "bar test: ------------------------------------" << endl;
             // The cast allows you to convert a pointer of one type to a pointer of another type,
             // and checks the correctness of the cast at runtime. If the cast is possible,
             // it will return the instantiated pointer to the requested type.
             if (Cowboy *cowboy = dynamic_cast<Cowboy *>(_chTeam.at(i)))
             {
+                cout << "bar test: ------------------------------------" << cowboy->getName() << endl;
                 if (cowboy->get_numBalls() > 0)
                 {
+                    cout << "shoot" << endl;
                     cowboy->shoot(target);
                 }
                 else
@@ -93,14 +101,21 @@ void Team::attack(Team *other_team)
             }
             else if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
             {
+                cout << "bar test: ------------------------------------" << ninja->getName() << endl;
+                cout << "ninja->distance(target): " << to_string(ninja->distance(target)) << endl;
                 if (ninja->distance(target) < 1)
                 {
+                    cout << "ninja: " << ninja->isAlive() << endl;
+                    cout << "t: " << target->isAlive() << endl;
+                    cout << "tname: " << target->getName() << endl;
                     ninja->slash(target);
                 }
                 else
                 {
+                    cout << "slash" << endl;
                     ninja->move(target);
                 }
+                cout << "Not good" << endl;
             }
         }
     }
@@ -119,14 +134,13 @@ int Team::stillAlive()
     return ans;
 }
 
-void Team::print() 
+void Team::print()
 {
     this->sort_team();
-            for (size_t i = 0; i < _chTeam.size(); i++)
-        {
-            _chTeam.at(i)->print();
-        }
-
+    for (size_t i = 0; i < _chTeam.size(); i++)
+    {
+        _chTeam.at(i)->print();
+    }
 }
 
 Character *Team::get_leader()
