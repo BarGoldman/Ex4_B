@@ -19,14 +19,16 @@ private:
 
 public:
     Character(string name, Point location, int hit, int type);
-    // ~Character(){cout<< "good dis to Character" << endl;}
+    virtual ~Character(){cout<< "good dis to Character" << endl;}
 
     bool isAlive();
     double distance(Character *player);
     void hit(int num);
     string getName();
     Point getLocation();
-    string print();
+
+    // print in the character must be implemented in cowboy && Ninja
+    virtual string print() const = 0;
 
     //// add by me
     int get_hitPoints();

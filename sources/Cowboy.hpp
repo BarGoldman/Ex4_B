@@ -16,10 +16,12 @@ private:
 
 public:
     Cowboy(string name, Point location);
+    ~Cowboy(){cout<< "good dis to Cowboy" << endl;};
 
     void shoot(Character *enemy);
     bool hasboolets();
     void reload();
+    string print() const;
 
     ////
     int get_numBalls();

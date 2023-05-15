@@ -33,3 +33,5 @@ void Ninja::slash(Character *enemy)
 int Ninja::get_speed(){
     return _speed;
 }
+
+string Ninja::print() const{return "h";}

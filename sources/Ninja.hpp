@@ -15,9 +15,12 @@ private:
 
 public:
     Ninja(string name, Point location, int hit, int speed);
+    ~Ninja(){cout<< "good dis to Ninja" << endl;}
 
     void move(Character *enemy);
     void slash(Character *enemy);
+
+    string print() const;
 
     ///
     int get_speed();
