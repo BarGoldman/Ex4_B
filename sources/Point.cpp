@@ -36,8 +36,8 @@ Point Point::moveTowards(const Point &source,  const Point &target, double dis)
     }
 
     //Find a unit vector in the direction from A to B,
-    double unit_V_x = (source._x - target._x) / dis_test;
-    double unit_V_y = (source._y - target._y) / dis_test;
+    double unit_V_x = (target._x - source._x) / dis_test;
+    double unit_V_y = (target._y - source._y) / dis_test;
 
     // multiply it in the dis range that the function accepts
     double new_x = unit_V_x * dis;

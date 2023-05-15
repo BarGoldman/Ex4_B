@@ -126,14 +126,14 @@ int Team::stillAlive()
     return ans;
 }
 
-void Team::print() const
+void Team::print() 
 {
-    // _chTeam =
-    //     for (size_t i = 0; i < _chTeam.size(); i++)
-    // {
-    //     _chTeam.at(i)->print();
-    //     cout << "i: " << i << endl;
-    // }
+    this->sort_team();
+            for (size_t i = 0; i < _chTeam.size(); i++)
+        {
+            _chTeam.at(i)->print();
+        }
+
 }
 
 Character *Team::get_leader()

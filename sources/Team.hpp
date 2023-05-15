@@ -31,7 +31,7 @@ public:
     void add(Character* player);
     virtual void attack(Team* other_team);
     int stillAlive();
-    virtual void print() const;
+    virtual void print();
 
 
     //////////// add by me
