@@ -1,4 +1,5 @@
 #include "Point.hpp"
+#include "Character.hpp"
 #include <cmath>
 #include <iostream>
 using namespace std;
