@@ -28,12 +28,13 @@ void Team::sort_team()
 
 Character *Team::new_target(Team *other_team)
 {
-    int count = 0;
+    size_t count = 0;
     int min_des = std::numeric_limits<double>::max();
     for (size_t i = 0; i < other_team->_chTeam.size(); i++)
     {
-        if (_leader->distance(other_team->_chTeam.at(i)) < min_des)
+        if (other_team->_chTeam.at(i)->isAlive() && _leader->distance(other_team->_chTeam.at(i)) < min_des)
         {
+            min_des = _leader->distance(other_team->_chTeam.at(i));
             count = i;
         }
     }
@@ -44,32 +45,24 @@ Character *Team::new_target(Team *other_team)
 void Team::attack(Team *other_team)
 {
     this->sort_team();
-    if (other_team->stillAlive() > 0 || stillAlive() > 0)
+    if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {
         throw runtime_error("one of the team is dead");
     }
 
     if (!(_leader->isAlive()))
     {
+        double des = std::numeric_limits<double>::max();
         for (size_t i = 0; i < _chTeam.size(); i++)
         {
-            double des = std::numeric_limits<double>::max();
-            if (_chTeam.at(i)->isAlive() && des < _leader->distance(_chTeam.at(i)))
+            if (_chTeam.at(i)->isAlive() && des > _leader->distance(_chTeam.at(i)))
             {
+                des = _leader->distance(_chTeam.at(i));
                 _leader = _chTeam.at(i);
             }
         }
     }
 
-    int count = 0;
-    int min_des = std::numeric_limits<double>::max();
-    for (size_t i = 0; i < other_team->_chTeam.size(); i++)
-    {
-        if (_leader->distance(other_team->_chTeam.at(i)) < min_des)
-        {
-            count = i;
-        }
-    }
     Character *target = new_target(other_team);
 
     for (size_t i = 0; i < _chTeam.size(); i++)
@@ -78,7 +71,7 @@ void Team::attack(Team *other_team)
         {
             target = new_target(other_team);
         }
-        if (other_team->stillAlive() < 0 || stillAlive() < 0)
+        if (other_team->stillAlive() < 1 || stillAlive() < 1)
         {
             break;
         }

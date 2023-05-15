@@ -20,7 +20,7 @@ double Point::distance(const Point &point2) const
 string Point::print() const
 {
     string ans = "";
-    ans = '(' + _x + ',' + _y + ')';
+    ans = '(' + to_string(_x) + ',' + to_string(_y) + ')';
     return ans;
 }
 

@@ -13,7 +13,7 @@ public:
     Team2(Character* player):Team(player){}
     ~Team2() override {};
 
-    void print();
+    void print() override;
 
     void attack(Team* other_team) override;
 
