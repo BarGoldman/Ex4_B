@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-Character::Character(string name, Point location, int hit) : _name(name), _location(location), _hitPoints(hit)
+Character::Character(string name, Point location, int hit, int type) : _name(name), _location(location), _hitPoints(hit) , _type(type)
 {
 }
 
