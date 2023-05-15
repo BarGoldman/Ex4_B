@@ -12,28 +12,27 @@ class Character
 {
 private:
     string _name;
+    // The same point can be set for each of the characters
     Point _location;
     int _hitPoints;
 
-    int _type; // 1 - for Ninja  , 2 - for Cowboy
-
 public:
-    Character(string name, Point location, int hit, int type);
+    Character(string name, Point location, int hit);
+
     virtual ~Character(){cout<< "good dis to Character" << endl;}
 
     bool isAlive() const;
-    double distance(Character *player);
-    void hit(int num);
+    double distance(const Character *player) const;
+    void hit(const int num);
     string getName();
     Point getLocation();
 
-    // print in the character must be implemented in cowboy && Ninja
+    // print in the character
     virtual string print() const;
 
     //// add by me
     int get_hitPoints();
-    string get_name();
-    Point get_location();
+
 
     void set_location(const Point& new_point);
 };

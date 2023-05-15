@@ -19,7 +19,7 @@ public:
     ~Cowboy(){cout<< "good dis to Cowboy" << endl;};
 
     void shoot(Character *enemy);
-    bool hasboolets();
+    bool hasboolets() const;
     void reload();
     string print() const;
 

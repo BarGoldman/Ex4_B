@@ -4,7 +4,7 @@
 
 using namespace ariel;
 
-Ninja::Ninja(string name, Point location,int hit ,int speed):Character(name, location, hit,1),_speed(speed)
+Ninja::Ninja(string name, Point location,int hit ,int speed):Character(name, location, hit),_speed(speed)
 {
 
 }

@@ -27,29 +27,29 @@ string Point::print() const
 Point Point::moveTowards(const Point &source,  const Point &target, double dis)
 {
     if(dis < 0){
-        throw std::invalid_argument("dis is a negtiv num");
+        throw std::invalid_argument("distance is a negtiv num");
     }
     double dis_test = source.distance(target);
     if(dis_test <= dis){
         return target;
     }
 
-    // //Find a unit vector in the direction from A to B,
-    // double unit_V_x = (source._x - target._x) / dis_test;
-    // double unit_V_y = (source._y - target._y) / dis_test;
+    //Find a unit vector in the direction from A to B,
+    double unit_V_x = (source._x - target._x) / dis_test;
+    double unit_V_y = (source._y - target._y) / dis_test;
 
-    // // multiply it in the dis range that the function accepts
-    // double new_x = unit_V_x * dis;
-    // double new_y = unit_V_y * dis;
+    // multiply it in the dis range that the function accepts
+    double new_x = unit_V_x * dis;
+    double new_y = unit_V_y * dis;
 
-    // // add the vector to point A
-    // return Point(new_x + source._x , new_y + source._y);
+    // add the vector to point A
+    return Point(new_x + source._x , new_y + source._y);
 
 
-    double r = dis / dis_test;
-    double new_x = (1 - r) * source._x + r * target._x;
-    double new_y = (1 - r) * source._y + r * target._y;
-    return Point(new_x,new_y);
+    // double r = dis / dis_test;
+    // double new_x = (1 - r) * source._x + r * target._x;
+    // double new_y = (1 - r) * source._y + r * target._y;
+    // return Point(new_x,new_y);
 }
 
 // ostream &operator<<(ostream &output, const Point &other)
