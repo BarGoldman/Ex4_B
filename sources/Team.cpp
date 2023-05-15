@@ -1,5 +1,6 @@
 #include "Team.hpp"
 #include <limits>
+#include <algorithm>
 
 Team::Team(Character *player) : _leader(player)
 {
@@ -15,47 +16,99 @@ void Team::add(Character *player)
     _chTeam.push_back(player);
 }
 
-vector<Character *> sort_team(vector<Character *> team)
+bool compareCharacters(Character *a, Character *b)
 {
-    // vector<Character* > ans;
-    // for(size_t i = 0; i < team.size(); i++){
-    //     if(team.at(i))
-    // }
+    return a->get_type() < b->get_type();
 }
+
+void Team::sort_team()
+{
+    std::sort(_chTeam.begin(), _chTeam.end(), compareCharacters);
+}
+
+Character *Team::new_target(Team *other_team)
+{
+    int count = 0;
+    int min_des = std::numeric_limits<double>::max();
+    for (size_t i = 0; i < other_team->_chTeam.size(); i++)
+    {
+        if (_leader->distance(other_team->_chTeam.at(i)) < min_des)
+        {
+            count = i;
+        }
+    }
+    Character *ans = other_team->_chTeam.at(count);
+    return ans;
+}
+
 void Team::attack(Team *other_team)
 {
-    while (other_team->stillAlive() > 0 && stillAlive() > 0)
+    this->sort_team();
+    if (other_team->stillAlive() > 0 || stillAlive() > 0)
     {
-        if (!(_leader->isAlive()))
+        throw runtime_error("one of the team is dead");
+    }
+
+    if (!(_leader->isAlive()))
+    {
+        for (size_t i = 0; i < _chTeam.size(); i++)
         {
-            for (size_t i = 0; i < _chTeam.size(); i++)
+            double des = std::numeric_limits<double>::max();
+            if (_chTeam.at(i)->isAlive() && des < _leader->distance(_chTeam.at(i)))
             {
-                double des = std::numeric_limits<double>::max();
-                if (_chTeam.at(i)->isAlive() && des < _leader->distance(_chTeam.at(i)))
+                _leader = _chTeam.at(i);
+            }
+        }
+    }
+
+    int count = 0;
+    int min_des = std::numeric_limits<double>::max();
+    for (size_t i = 0; i < other_team->_chTeam.size(); i++)
+    {
+        if (_leader->distance(other_team->_chTeam.at(i)) < min_des)
+        {
+            count = i;
+        }
+    }
+    Character *target = new_target(other_team);
+
+    for (size_t i = 0; i < _chTeam.size(); i++)
+    {
+        if (!(target->isAlive()))
+        {
+            target = new_target(other_team);
+        }
+        if (other_team->stillAlive() < 0 || stillAlive() < 0)
+        {
+            break;
+        }
+        if (_chTeam.at(i)->isAlive())
+        {
+            // The cast allows you to convert a pointer of one type to a pointer of another type,
+            // and checks the correctness of the cast at runtime. If the cast is possible,
+            // it will return the instantiated pointer to the requested type.
+            if (Cowboy *cowboy = dynamic_cast<Cowboy *>(_chTeam.at(i)))
+            {
+                if (cowboy->get_numBalls() > 0)
                 {
-                    _leader = _chTeam.at(i);
+                    cowboy->shoot(target);
+                }
+                else
+                {
+                    cowboy->reload();
                 }
             }
-        }
-
-        int count = 0;
-        int min_des = std::numeric_limits<double>::max();
-        for (size_t i = 0; i < other_team->_chTeam.size(); i++)
-        {
-            if (_leader->distance(other_team->_chTeam.at(i)) < min_des)
+            else if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
             {
-                count = i;
+                if (ninja->distance(target) < 1)
+                {
+                    ninja->slash(target);
+                }
+                else
+                {
+                    ninja->move(target);
+                }
             }
-        }
-        Character *target = _chTeam.at(count);
-        while (target->isAlive())
-        {
-            // for(size_t i = 0; i < _chTeam.size(); i++)
-            // {
-            //     if(_chTeam.at(i)->get_type() == 1){
-            //         if(_chTeam.at(i).)
-            //     }
-            // }
         }
     }
 }
