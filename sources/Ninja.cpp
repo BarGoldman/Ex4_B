@@ -34,4 +34,4 @@ int Ninja::get_speed(){
     return _speed;
 }
 
-string Ninja::print() const{return "h";}
+string Ninja::print() const{return "N: " +  Character::print();}

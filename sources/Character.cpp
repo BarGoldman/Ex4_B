@@ -8,7 +8,7 @@ Character::Character(string name, Point location, int hit, int type) : _name(nam
 {
 }
 
-bool Character::isAlive()
+bool Character::isAlive() const
 {
     return (_hitPoints > 0);
 }
@@ -20,7 +20,8 @@ double Character::distance(Character *player)
 
 void Character::hit(int num)
 {
-    if(num < 0 ){
+    if (num < 0)
+    {
         throw std::invalid_argument("num is negative value");
     }
     if (_hitPoints - num < 0)
@@ -43,6 +44,17 @@ Point Character::getLocation()
     return _location;
 }
 
+string Character::print() const{
+    string ans = "";
+    if (!(isAlive()))
+    {
+        ans = " Name: (" + _name + ") Location:" + _location.print();
+    }
+    else{
+        ans = "Name: " + _name + " Num Of Hit Point: " + to_string(_hitPoints) + " Location: " + _location.print();
+    }
+    return ans;
+}
 
 //////
 
@@ -51,7 +63,16 @@ int Character::get_hitPoints()
     return _hitPoints;
 }
 
-
-void Character::set_location(const Point& new_point){
+void Character::set_location(const Point &new_point)
+{
     _location = new_point;
+}
+
+string Character::get_name()
+{
+    return _name;
+}
+Point Character::get_location()
+{
+    return _location;
 }

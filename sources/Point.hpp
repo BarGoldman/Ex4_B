@@ -15,12 +15,12 @@ private:
 public:
     Point(double x_cd, double y_cd);
 
-    double distance(const Point &point2)const;
-    void print();
+    double distance(const Point &point2) const;
+    string print() const;
 
     static Point moveTowards(const Point & source, const Point & target, double dis);
 
-    friend ostream &operator<<(ostream &output, const Point &other);
+    // friend ostream &operator<<(ostream &output, const Point &other);
 };
 
 #endif

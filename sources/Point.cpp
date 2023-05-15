@@ -9,18 +9,19 @@ Point::Point(double x_cd , double y_cd):_x(x_cd) , _y(y_cd)
 }
 
 
-double Point::distance(const Point &point2)const
+double Point::distance(const Point &point2) const
 {
     double a = _x - point2._x;
     double b = _y - point2._y;
     return sqrt(pow(a, 2) + pow(b, 2));
 }
-void Point::print()
+
+string Point::print() const
 {
-    cout << '(' << _x << ',' << _y << ')' << endl;
+    string ans = "";
+    ans = '(' + _x + ',' + _y + ')';
+    return ans;
 }
-
-
 
 // In this part I asked the main group of the course how the function should be calculated
 Point Point::moveTowards(const Point &source,  const Point &target, double dis)
@@ -51,7 +52,7 @@ Point Point::moveTowards(const Point &source,  const Point &target, double dis)
     return Point(new_x,new_y);
 }
 
-ostream &operator<<(ostream &output, const Point &other)
-{
-    return (output << '(' << other._x << ',' << other._y << ')');
-}
+// ostream &operator<<(ostream &output, const Point &other)
+// {
+//     return (output << '(' << other._x << ',' << other._y << ')');
+// }
