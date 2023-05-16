@@ -34,9 +34,9 @@ public:
     virtual void print();
 
     //////////// add by me
-    virtual Character* get_leader();
+    Character* get_leader();
     virtual Character* new_target(Team *other_team);
-    virtual void Team::find_newLeader();
+    virtual void find_newLeader();
 
     // Getter for _chTeam
     const vector<Character*>& getChTeam() const;
@@ -49,10 +49,6 @@ public:
 
     // Setter for _leader
     void setLeader(Character* leader);
-
-
-    void find_newLeader();
-
 
 
 

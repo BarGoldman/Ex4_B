@@ -10,9 +10,6 @@ void Team2::print()
     }
 }
 
-Character *Team2::get_leader()
-{
-}
 Character *Team2::new_target(Team *other_team)
 {
     double max_des = std::numeric_limits<double>::max();
