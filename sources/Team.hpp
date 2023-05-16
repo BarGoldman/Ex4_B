@@ -37,7 +37,9 @@ public:
     //////////// add by me
     Character* get_leader();
     virtual void sort_team();
-    Character* new_target(Team *other_team);
+    virtual Character* new_target(Team *other_team);
+
+    void find_newLeader();
 
 
 

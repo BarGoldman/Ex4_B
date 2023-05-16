@@ -27,6 +27,7 @@ int main() {
 
     sushi->move(tom);
     sushi->slash(tom);
+    cout << "tom hit point : " << tom->get_hitPoints() << endl;
     
    
     Team team_A(tom); 
@@ -38,9 +39,15 @@ int main() {
      Team team_B(sushi);
      team_B.add(new TrainedNinja("Hikari", Point(12,81)));
 
-    //  team_A.print();
-    //  team_A.attack(&team_B);
-    //  team_A.print();
+
+      Cowboy *bar = new Cowboy("Bar", a);
+   //    team_A.add(bar);
+   // cout << "first: " << endl;
+   //   team_A.print();
+   //   cout << "2: " << endl;
+   //   team_A.attack(&team_B);
+   //   cout << "3: " << endl;
+   //   team_A.print();
 
 
      while(team_A.stillAlive() > 0 && team_B.stillAlive() > 0){

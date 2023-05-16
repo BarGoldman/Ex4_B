@@ -29,22 +29,63 @@ void Team::sort_team()
 Character *Team::new_target(Team *other_team)
 {
     size_t count = 0;
-    int min_des = std::numeric_limits<double>::max();
+    double max_des = std::numeric_limits<double>::max();
+    Character *ans = nullptr;
     for (size_t i = 0; i < other_team->_chTeam.size(); i++)
     {
-        if (other_team->_chTeam.at(i)->isAlive() && _leader->distance(other_team->_chTeam.at(i)) < min_des)
+        if (other_team->_chTeam.at(i)->isAlive() && _leader->distance(other_team->_chTeam.at(i)) < max_des)
         {
-            min_des = _leader->distance(other_team->_chTeam.at(i));
-            count = i;
+            if (Cowboy *cowboy = dynamic_cast<Cowboy *>(other_team->_chTeam.at(i)))
+            {
+                max_des = _leader->distance(other_team->_chTeam.at(i));
+                ans = other_team->_chTeam.at(i);
+            }
         }
     }
-    Character *ans = other_team->_chTeam.at(count);
+    for (size_t i = 0; i < other_team->_chTeam.size(); i++)
+    {
+        if (other_team->_chTeam.at(i)->isAlive() && _leader->distance(other_team->_chTeam.at(i)) < max_des)
+        {
+            if (Ninja *ninja = dynamic_cast<Ninja *>(other_team->_chTeam.at(i)))
+            {
+                max_des = _leader->distance(other_team->_chTeam.at(i));
+                ans = other_team->_chTeam.at(i);
+            }
+        }
+    }
     return ans;
+}
+
+void Team::find_newLeader()
+{
+    double des = std::numeric_limits<double>::max();
+    for (size_t i = 0; i < _chTeam.size(); i++)
+    {
+        if (_chTeam.at(i)->isAlive() && des > _leader->distance(_chTeam.at(i)))
+        {
+            if (Cowboy *cowboy = dynamic_cast<Cowboy *>(_chTeam.at(i)))
+            {
+                des = _leader->distance(_chTeam.at(i));
+                _leader = _chTeam.at(i);
+            }
+        }
+    }
+    for (size_t i = 0; i < _chTeam.size(); i++)
+    {
+        if (_chTeam.at(i)->isAlive() && des > _leader->distance(_chTeam.at(i)))
+        {
+            if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
+            {
+                des = _leader->distance(_chTeam.at(i));
+                _leader = _chTeam.at(i);
+            }
+        }
+    }
 }
 
 void Team::attack(Team *other_team)
 {
-    this->sort_team();
+    
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {
         throw runtime_error("one of the team is dead");
@@ -52,70 +93,58 @@ void Team::attack(Team *other_team)
 
     if (!(_leader->isAlive()))
     {
-        double des = std::numeric_limits<double>::max();
-        for (size_t i = 0; i < _chTeam.size(); i++)
-        {
-            if (_chTeam.at(i)->isAlive() && des > _leader->distance(_chTeam.at(i)))
-            {
-                des = _leader->distance(_chTeam.at(i));
-                _leader = _chTeam.at(i);
-            }
-        }
+        find_newLeader();
     }
 
     Character *target = new_target(other_team);
-
     for (size_t i = 0; i < _chTeam.size(); i++)
     {
+        
         if (other_team->stillAlive() < 1 || stillAlive() < 1)
         {
             break;
         }
-        cout << "target->getName(): " << target->getName() << endl;
+        if (!(_leader->isAlive()))
+        {
+            
+            find_newLeader();
+        }
+
         if (!(target->isAlive()))
         {
-            cout << "hiiiii bar" << endl;
             target = new_target(other_team);
         }
 
         if (_chTeam.at(i)->isAlive())
         {
-            cout << "i " << i << endl;
-            cout << "ch " << _chTeam.at(i)->isAlive() << endl;
-            cout << "bar test: ------------------------------------" << endl;
             // The cast allows you to convert a pointer of one type to a pointer of another type,
             // and checks the correctness of the cast at runtime. If the cast is possible,
             // it will return the instantiated pointer to the requested type.
             if (Cowboy *cowboy = dynamic_cast<Cowboy *>(_chTeam.at(i)))
             {
-                cout << "bar test: ------------------------------------" << cowboy->getName() << endl;
                 if (cowboy->get_numBalls() > 0)
                 {
-                    cout << "shoot" << endl;
+                    
                     cowboy->shoot(target);
                 }
                 else
                 {
+                    cout << "reload" << endl;
                     cowboy->reload();
                 }
             }
             else if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
             {
-                cout << "bar test: ------------------------------------" << ninja->getName() << endl;
-                cout << "ninja->distance(target): " << to_string(ninja->distance(target)) << endl;
                 if (ninja->distance(target) < 1)
                 {
-                    cout << "ninja: " << ninja->isAlive() << endl;
-                    cout << "t: " << target->isAlive() << endl;
-                    cout << "tname: " << target->getName() << endl;
+                    cout << "slash" << endl;
                     ninja->slash(target);
                 }
                 else
                 {
-                    cout << "slash" << endl;
+                    cout << "move" << endl;
                     ninja->move(target);
                 }
-                cout << "Not good" << endl;
             }
         }
     }
@@ -136,11 +165,17 @@ int Team::stillAlive()
 
 void Team::print()
 {
-    this->sort_team();
+    sort_team();
+    string ans = "";
     for (size_t i = 0; i < _chTeam.size(); i++)
     {
-        _chTeam.at(i)->print();
+        if (Cowboy *cowboy = dynamic_cast<Cowboy *>(_chTeam.at(i))){
+            ans = ans + cowboy->print() + " ,"; 
+        }
+        else if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
+            {ans = ans +ninja->print() + " ," ;}
     }
+    cout<< ans << endl;
 }
 
 Character *Team::get_leader()
