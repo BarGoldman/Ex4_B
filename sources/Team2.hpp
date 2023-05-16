@@ -19,6 +19,7 @@ public:
 
     Character* get_leader() override;
     Character* new_target(Team *other_team) override;
+    void find_newLeader() override;
 
 
 

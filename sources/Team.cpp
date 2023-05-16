@@ -16,19 +16,8 @@ void Team::add(Character *player)
     _chTeam.push_back(player);
 }
 
-bool compareCharacters(Character *a, Character *b)
-{
-    return a->get_type() < b->get_type();
-}
-
-void Team::sort_team()
-{
-    std::sort(_chTeam.begin(), _chTeam.end(), compareCharacters);
-}
-
 Character *Team::new_target(Team *other_team)
 {
-    size_t count = 0;
     double max_des = std::numeric_limits<double>::max();
     Character *ans = nullptr;
     for (size_t i = 0; i < other_team->_chTeam.size(); i++)
@@ -85,7 +74,7 @@ void Team::find_newLeader()
 
 void Team::attack(Team *other_team)
 {
-    
+
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {
         throw runtime_error("one of the team is dead");
@@ -99,14 +88,14 @@ void Team::attack(Team *other_team)
     Character *target = new_target(other_team);
     for (size_t i = 0; i < _chTeam.size(); i++)
     {
-        
+
         if (other_team->stillAlive() < 1 || stillAlive() < 1)
         {
             break;
         }
         if (!(_leader->isAlive()))
         {
-            
+
             find_newLeader();
         }
 
@@ -124,7 +113,7 @@ void Team::attack(Team *other_team)
             {
                 if (cowboy->get_numBalls() > 0)
                 {
-                    
+
                     cowboy->shoot(target);
                 }
                 else
@@ -133,7 +122,32 @@ void Team::attack(Team *other_team)
                     cowboy->reload();
                 }
             }
-            else if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
+        }
+    }
+    for (size_t i = 0; i < _chTeam.size(); i++)
+    {
+
+        if (other_team->stillAlive() < 1 || stillAlive() < 1)
+        {
+            break;
+        }
+        if (!(_leader->isAlive()))
+        {
+
+            find_newLeader();
+        }
+
+        if (!(target->isAlive()))
+        {
+            target = new_target(other_team);
+        }
+
+        if (_chTeam.at(i)->isAlive())
+        {
+            // The cast allows you to convert a pointer of one type to a pointer of another type,
+            // and checks the correctness of the cast at runtime. If the cast is possible,
+            // it will return the instantiated pointer to the requested type.
+            if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
             {
                 if (ninja->distance(target) < 1)
                 {
@@ -165,22 +179,48 @@ int Team::stillAlive()
 
 void Team::print()
 {
-    sort_team();
     string ans = "";
     for (size_t i = 0; i < _chTeam.size(); i++)
     {
-        if (Cowboy *cowboy = dynamic_cast<Cowboy *>(_chTeam.at(i))){
-            ans = ans + cowboy->print() + " ,"; 
+        if (Cowboy *cowboy = dynamic_cast<Cowboy *>(_chTeam.at(i)))
+        {
+            ans = ans + cowboy->print() + " ,";
         }
         else if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
-            {ans = ans +ninja->print() + " ," ;}
+        {
+            ans = ans + ninja->print() + " ,";
+        }
     }
-    cout<< ans << endl;
+    cout << ans << endl;
 }
 
 Character *Team::get_leader()
 {
     return _leader;
+}
+
+// Getter for _chTeam
+const vector<Character *> &Team::getChTeam() const
+{
+    return _chTeam;
+}
+
+// Setter for _chTeam
+void Team::setChTeam(const vector<Character *> &chTeam)
+{
+    _chTeam = chTeam;
+}
+
+// Getter for _leader
+Character *Team::getLeader() const
+{
+    return _leader;
+}
+
+// Setter for _leader
+void Team::setLeader(Character *leader)
+{
+    _leader = leader;
 }
 
 // Team::~Team(){

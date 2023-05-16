@@ -33,11 +33,23 @@ public:
     int stillAlive();
     virtual void print();
 
-
     //////////// add by me
     virtual Character* get_leader();
-    virtual void sort_team();
     virtual Character* new_target(Team *other_team);
+    virtual void Team::find_newLeader();
+
+    // Getter for _chTeam
+    const vector<Character*>& getChTeam() const;
+
+    // Setter for _chTeam
+    void setChTeam(const vector<Character*>& chTeam);
+
+    // Getter for _leader
+    Character* getLeader() const;
+
+    // Setter for _leader
+    void setLeader(Character* leader);
+
 
     void find_newLeader();
 
