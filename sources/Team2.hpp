@@ -17,6 +17,10 @@ public:
 
     void attack(Team* other_team) override;
 
+    Character* get_leader() override;
+    Character* new_target(Team *other_team) override;
+
+
 
 
     Team2(const Team2&) = delete;
