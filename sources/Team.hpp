@@ -47,10 +47,10 @@ public:
     virtual void find_newLeader();
 
     // Getter for _chTeam
-    const vector<Character*>& getChTeam() const;
+    const vector<Character*>& get_chTeam() const;
 
     // Setter for _chTeam
-    void set_chTeamTeam(const vector<Character*>& chTeam);
+    void set_chTeam(const vector<Character*>& chTeam);
 
 
 

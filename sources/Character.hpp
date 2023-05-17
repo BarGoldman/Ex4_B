@@ -42,6 +42,9 @@ public:
 
 
     void set_location(const Point& new_point);
+
+
+    bool operator<(const Character& other) const ;
 };
 
 #endif

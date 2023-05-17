@@ -200,13 +200,13 @@ Character *Team::get_leader() const
 }
 
 // Getter for _chTeam
-const vector<Character *> &Team::getChTeam() const
+const vector<Character *> &Team::get_chTeam() const
 {
     return _chTeam;
 }
 
 // Setter for _chTeam
-void Team::set_chTeamTeam(const vector<Character *> &chTeam)
+void Team::set_chTeam(const vector<Character *> &chTeam)
 {
     _chTeam = chTeam;
 }

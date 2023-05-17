@@ -11,7 +11,7 @@ namespace ariel
 class SmartTeam : public Team
 {
 public:
-    SmartTeam(Character* player):Team(player){};
+    SmartTeam(Character* player);
     ~SmartTeam()override{};
 
     void print() override;
@@ -20,6 +20,8 @@ public:
 
     Character* new_target(Team *other_team) override;
     void find_newLeader() override;
+
+    void sort_Team();
 
 
 
