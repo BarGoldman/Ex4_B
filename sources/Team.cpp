@@ -2,8 +2,14 @@
 #include <limits>
 #include <algorithm>
 
-Team::Team(Character *player) : _leader(player)
+Team::Team(Character *player) : _leader(player) 
 {
+    if(player == nullptr){
+        throw std::invalid_argument("you try to add null player");
+    }
+    if(player->get_inTeam() == 1){
+        throw std::runtime_error("Appointing the same captain to different teams");
+    }
     add(player);
 }
 
@@ -13,7 +19,11 @@ void Team::add(Character *player)
     {
         throw std::runtime_error("A team can have at most 10 teammates");
     }
+    if(player->get_inTeam() == 1){
+        throw std::runtime_error("Adding the same character to different teams");
+    }
     _chTeam.push_back(player);
+    player->set_inTeam();
 }
 
 Character *Team::new_target(Team *other_team)
@@ -74,6 +84,9 @@ void Team::find_newLeader()
 
 void Team::attack(Team *other_team)
 {
+    if(other_team == nullptr){
+        throw std::invalid_argument("Sending nullptr to the attack() method");
+    }
 
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {

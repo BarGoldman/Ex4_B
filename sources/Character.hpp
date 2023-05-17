@@ -17,10 +17,10 @@ private:
     int _hitPoints;
 
 
-    int _type; // 1 for cowboy 2- for Ninja
+    int _inTeam; // 1 for cowboy 2- for Ninja
 
 public:
-    Character(string name, Point location, int hit, int type);
+    Character(string name, Point location, int hit);
 
     virtual ~Character(){cout<< "good dis to Character" << endl;}
 
@@ -34,10 +34,14 @@ public:
     virtual string print() const;
 
     //// add by me
-    int get_hitPoints();
+    int get_hitPoints() const;
 
-    int get_type(){
-        return _type;
+    int get_inTeam(){
+        return _inTeam;
+    }
+
+    void set_inTeam(){
+        _inTeam = 1;
     }
 
 

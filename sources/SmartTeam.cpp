@@ -30,13 +30,13 @@ void SmartTeam::print()
     }
 }
 
-bool compareCharacters(Character &character1, Character &character2)
+bool compareCharacters(Character* character1,Character *character2)
 {
-    return character1.get_hitPoints() < character2.get_hitPoints();
+    return character1->get_hitPoints() < character2->get_hitPoints();
 }
 
 void SmartTeam::sort_Team(){
-    std::sort(get_chTeam().begin(), get_chTeam().end(), compareCharacters);
+    //std::__sort(get_chTeam().begin(), get_chTeam().end(), compareCharacters);
 }
 
 void SmartTeam::attack(Team *other_team)

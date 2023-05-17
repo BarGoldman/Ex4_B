@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-Character::Character(string name, Point location, int hit, int type) : _name(name), _location(location), _hitPoints(hit) , _type(type)
+Character::Character(string name, Point location, int hit) : _name(name), _location(location), _hitPoints(hit) ,_inTeam(0)
 {
 }
 
@@ -54,7 +54,7 @@ string Character::print() const{
 
 //////
 
-int Character::get_hitPoints()
+int Character::get_hitPoints() const
 {
     return _hitPoints;
 }
