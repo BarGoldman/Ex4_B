@@ -41,6 +41,9 @@ void Team2::find_newLeader()
 }
 void Team2::attack(Team *other_team)
 {
+        if(other_team == nullptr){
+        throw std::invalid_argument("Sending nullptr to the attack() method");
+    }
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {
         throw runtime_error("one of the team is dead");
@@ -84,7 +87,6 @@ void Team2::attack(Team *other_team)
                 }
                 else
                 {
-                    cout << "reload" << endl;
                     cowboy->reload();
                 }
             }
@@ -92,12 +94,10 @@ void Team2::attack(Team *other_team)
             {
                 if (ninja->distance(target) < 1)
                 {
-                    cout << "slash" << endl;
                     ninja->slash(target);
                 }
                 else
                 {
-                    cout << "move" << endl;
                     ninja->move(target);
                 }
             }

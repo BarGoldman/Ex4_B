@@ -41,6 +41,9 @@ void SmartTeam::sort_Team(){
 
 void SmartTeam::attack(Team *other_team)
 {
+            if(other_team == nullptr){
+        throw std::invalid_argument("Sending nullptr to the attack() method");
+    }
     sort_Team();
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {
@@ -85,7 +88,6 @@ void SmartTeam::attack(Team *other_team)
                 }
                 else
                 {
-                    cout << "reload" << endl;
                     cowboy->reload();
                 }
             }
@@ -93,12 +95,10 @@ void SmartTeam::attack(Team *other_team)
             {
                 if (ninja->distance(target) < 1)
                 {
-                    cout << "slash" << endl;
                     ninja->slash(target);
                 }
                 else
                 {
-                    cout << "move" << endl;
                     ninja->move(target);
                 }
             }

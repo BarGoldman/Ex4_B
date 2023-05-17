@@ -131,7 +131,6 @@ void Team::attack(Team *other_team)
                 }
                 else
                 {
-                    cout << "reload" << endl;
                     cowboy->reload();
                 }
             }
@@ -164,12 +163,10 @@ void Team::attack(Team *other_team)
             {
                 if (ninja->distance(target) < 1)
                 {
-                    cout << "slash" << endl;
                     ninja->slash(target);
                 }
                 else
                 {
-                    cout << "move" << endl;
                     ninja->move(target);
                 }
             }
