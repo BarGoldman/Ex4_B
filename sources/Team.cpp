@@ -194,7 +194,7 @@ void Team::print()
     cout << ans << endl;
 }
 
-Character *Team::get_leader()
+Character *Team::get_leader() const
 {
     return _leader;
 }
@@ -206,15 +206,9 @@ const vector<Character *> &Team::getChTeam() const
 }
 
 // Setter for _chTeam
-void Team::setChTeam(const vector<Character *> &chTeam)
+void Team::set_chTeamTeam(const vector<Character *> &chTeam)
 {
     _chTeam = chTeam;
-}
-
-// Getter for _leader
-Character *Team::getLeader() const
-{
-    return _leader;
 }
 
 // Setter for _leader
