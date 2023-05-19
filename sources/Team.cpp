@@ -42,7 +42,7 @@ Character *Team::new_target(Team *other_team)
     {
         if (other_team->_chTeam.at(i)->isAlive() && _leader->distance(other_team->_chTeam.at(i)) < max_des)
         {
-            if (Cowboy *cowboy = dynamic_cast<Cowboy *>(_chTeam.at(i)))
+            if (Cowboy *cowboy = dynamic_cast<Cowboy *>(other_team->_chTeam.at(i)))
             {
                 max_des = _leader->distance(other_team->_chTeam.at(i));
                 ans = other_team->_chTeam.at(i);
@@ -53,7 +53,7 @@ Character *Team::new_target(Team *other_team)
     {
         if (other_team->_chTeam.at(i)->isAlive() && _leader->distance(other_team->_chTeam.at(i)) < max_des)
         {
-            if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
+            if (Ninja *ninja = dynamic_cast<Ninja *>(other_team->_chTeam.at(i)))
             {
                 max_des = _leader->distance(other_team->_chTeam.at(i));
                 ans = other_team->_chTeam.at(i);
@@ -104,7 +104,6 @@ void Team::attack(Team *other_team)
     {
         find_newLeader();
     }
-
     Character *target = new_target(other_team);
     if (target == nullptr)
     {
