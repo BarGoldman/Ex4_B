@@ -17,7 +17,7 @@ private:
     int _hitPoints;
 
 
-    int _inTeam; // 1 for cowboy 2- for Ninja
+    int _inTeam; // 1 if he in team
 
 public:
     Character(string name, Point location, int hit);
@@ -38,26 +38,21 @@ public:
 
 
     //////////////////////////////// Added By Myself ////////////////////////////////
-    int get_hitPoints() const;
+    int get_hitPoints() const; // return the player hit Points
 
-    int get_inTeam() const{
-        return _inTeam;
-    }
-
-    void set_inTeam(){
-        _inTeam = 1;
-    }
+    int get_inTeam() const; // return 1 - if player in Team , 0 - if He has not joined the group yet
+    
+    void set_inTeam();// Updates 1 to the ingroup if he joined the group
+    
+    void set_location(const Point& new_point); // Updates the player's location
 
 
-    void set_location(const Point& new_point);
 
 
-    bool operator<(const Character& other) const ;
 
+    bool operator<(const Character& other) const ; 
 
     // Declare the defaulted special member functions
-
-
 
     Character(const Character&) = delete;
     Character& operator=(const Character&) = delete;

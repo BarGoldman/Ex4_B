@@ -1,7 +1,4 @@
 #include "Character.hpp"
-#include <string>
-#include <cmath>
-#include <iostream>
 using namespace std;
 
 Character::Character(string name, Point location, int hit) : _name(name), _location(location), _hitPoints(hit) ,_inTeam(0)
@@ -52,17 +49,34 @@ string Character::print() const{
     return ans;
 }
 
-//////
+//////////////////////////////// Added By Myself ////////////////////////////////
 
 int Character::get_hitPoints() const
 {
     return _hitPoints;
 }
 
+int Character::get_inTeam() const
+{
+    return _inTeam;
+}
+
+void Character::set_inTeam()
+{
+    _inTeam = 1;
+}
+
 void Character::set_location(const Point &new_point)
 {
     _location = new_point;
 }
+
+
+
+
+
+
+
 
 
 bool Character::operator<(const Character& other) const {
