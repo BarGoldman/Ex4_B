@@ -13,12 +13,14 @@ public:
     Team2(Character* player):Team(player){}
     ~Team2() override {};
 
+    void attack(Team* other_team) override;
     void print() override;
 
-    void attack(Team* other_team) override;
+    //////////////////////////////// Added By Myself ////////////////////////////////
 
     Character* new_target(Team *other_team) override;
     void find_newLeader() override;
+
 
 
 

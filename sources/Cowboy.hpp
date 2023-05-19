@@ -16,7 +16,7 @@ private:
 
 public:
     Cowboy(string name, Point location);
-    ~Cowboy()override{cout<< "good dis to Cowboy" << endl;};
+    ~Cowboy()override{};
 
 
     //If the Cowboy is not dead and has bullets left,     

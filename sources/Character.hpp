@@ -22,7 +22,7 @@ private:
 public:
     Character(string name, Point location, int hit);
 
-    virtual ~Character(){cout<< "good dis to Character" << endl;}
+    virtual ~Character(){};
 
     bool isAlive() const; //returns a boolean value is the character alive (that is, has more than zero hit points)
     double distance(const Character *player) const; // Returns the distance between the characters

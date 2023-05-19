@@ -20,6 +20,9 @@ void Ninja::slash(Character *enemy)
     if(!(enemy->isAlive()) || !(isAlive())){
         throw std::runtime_error("Attacking a dead character");
     }
+    if(enemy == nullptr){
+        throw std::runtime_error("No enemy");
+    }
     if (enemy == &(*this))
     {
         throw std::runtime_error("No self harm");
@@ -31,5 +34,3 @@ void Ninja::slash(Character *enemy)
 }
 
 string Ninja::print() const{return "N: " +  Character::print();}
-
-int Ninja::get_speed(){return _speed;}

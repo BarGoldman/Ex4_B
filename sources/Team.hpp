@@ -26,33 +26,27 @@ private:
 public:
     Team(Character* player);
 
-    virtual ~Team(){cout<< "good dis to team" << endl;}
+    virtual ~Team();
 
-    void add(Character* player);
-    virtual void attack(Team* other_team);
-    int stillAlive();
-    virtual void print();
+    void add(Character* player); // add Character to team
+    virtual void attack(Team* other_team); 
+    int stillAlive(); // Returns an integer number of surviving group members
+    virtual void print(); // print group members 
 
-    //////////// add by me /////////////////////////////////////////////
-
-
-    // Getter for _leader
-    Character* get_leader() const;    
-    
-    // Setter for _leader
-    void setLeader(Character* leader);
-
+    //////////////////////////////// Added By Myself ////////////////////////////////
 
     virtual Character* new_target(Team *other_team);
     virtual void find_newLeader();
+    
+    Character* get_leader() const;     // get  _leader  
+    void setLeader(Character* leader);    // Set _leader    
+    
+    const vector<Character*>& get_chTeam() const; // get _chTeam
+    void set_chTeam(const vector<Character*>& chTeam); // set _chTeam
 
-    // void find_newLeader();
 
-    // Getter for _chTeam
-    const vector<Character*>& get_chTeam() const;
 
-    // Setter for _chTeam
-    void set_chTeam(const vector<Character*>& chTeam);
+
 
 
 
