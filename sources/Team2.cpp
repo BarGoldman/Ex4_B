@@ -82,7 +82,7 @@ void Team2::attack(Team *other_team)
             // it will return the instantiated pointer to the requested type.
             if (Cowboy *cowboy = dynamic_cast<Cowboy *>(get_chTeam().at(i)))
             {
-                if (cowboy->get_numBalls() > 0)
+                if (cowboy->hasboolets())
                 {
 
                     cowboy->shoot(target);

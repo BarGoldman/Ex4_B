@@ -14,6 +14,9 @@ void Cowboy::shoot(Character *enemy)
     {
         throw std::runtime_error("Dead character");
     }
+    if(enemy == nullptr){
+        throw std::runtime_error("No enemy");
+    }
     if (enemy == &(*this))
     {
         throw std::runtime_error("No self harm");
@@ -41,9 +44,4 @@ void Cowboy::reload()
 
 string Cowboy::print() const {
     return "C: " +  Character::print();
-}
-
-int Cowboy::get_numBalls()
-{
-    return _numBalls;
 }
