@@ -18,8 +18,9 @@ public:
     void attack(Team* other_team) override;
 
 
-    // Character* new_target(Team *other_team) override;
-    // void find_newLeader() override;
+    Character* new_target(Team *other_team) override;
+    void find_newLeader() override;
+    bool compareCharacters(Character* character1,Character *character2);
 
     void sort_Team();
 

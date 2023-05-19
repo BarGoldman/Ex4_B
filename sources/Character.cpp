@@ -18,7 +18,7 @@ double Character::distance(const Character *player) const
     return _location.distance(player->_location);
 }
 
-void Character::hit(const int num)
+void Character::hit(int num)
 {
     if (num < 0)
     {

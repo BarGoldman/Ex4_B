@@ -45,15 +45,4 @@ Point Point::moveTowards(const Point &source,  const Point &target, double dis)
 
     // add the vector to point A
     return Point(new_x + source._x , new_y + source._y);
-
-
-    // double r = dis / dis_test;
-    // double new_x = (1 - r) * source._x + r * target._x;
-    // double new_y = (1 - r) * source._y + r * target._y;
-    // return Point(new_x,new_y);
 }
-
-// ostream &operator<<(ostream &output, const Point &other)
-// {
-//     return (output << '(' << other._x << ',' << other._y << ')');
-// }

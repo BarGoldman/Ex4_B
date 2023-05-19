@@ -16,15 +16,21 @@ private:
 
 public:
     Cowboy(string name, Point location);
-    ~Cowboy(){cout<< "good dis to Cowboy" << endl;};
+    ~Cowboy()override{cout<< "good dis to Cowboy" << endl;};
 
     void shoot(Character *enemy);
     bool hasboolets() const;
     void reload();
-    string print() const;
+    string print() const override;
 
     ////
     int get_numBalls();
+
+
+        Cowboy(const Cowboy&) = delete;
+    Cowboy& operator=(const Cowboy&) = delete;
+    Cowboy(Cowboy&&) = delete;
+    Cowboy& operator=(Cowboy&&) = delete;
 };
 
 #endif

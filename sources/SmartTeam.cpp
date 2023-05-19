@@ -30,21 +30,56 @@ void SmartTeam::print()
     }
 }
 
-bool compareCharacters(Character* character1,Character *character2)
+Character *SmartTeam::new_target(Team *other_team)
 {
-    return character1->get_hitPoints() < character2->get_hitPoints();
+    double max_des = std::numeric_limits<double>::max();
+    Character *ans = nullptr;
+    for (size_t i = 0; i < other_team->get_chTeam().size(); i++)
+    {
+        if (other_team->get_chTeam().at(i)->isAlive() && get_leader()->distance(other_team->get_chTeam().at(i)) < max_des)
+        {
+
+            max_des = get_leader()->distance(other_team->get_chTeam().at(i));
+            ans = other_team->get_chTeam().at(i);
+        }
+    }
+    return ans;
+}
+void SmartTeam::find_newLeader()
+{
+    double des = std::numeric_limits<double>::max();
+    size_t count = 0;
+    for (size_t i = 0; i < get_chTeam().size(); i++)
+    {
+        if (get_chTeam().at(i)->isAlive() && des > get_leader()->distance(get_chTeam().at(i)))
+        {
+            des = get_leader()->distance(get_chTeam().at(i));
+            count = i;
+        }
+    }
+    setLeader(get_chTeam().at(count));
 }
 
-void SmartTeam::sort_Team(){
-    //std::__sort(get_chTeam().begin(), get_chTeam().end(), compareCharacters);
+bool SmartTeam::compareCharacters(Character* character1,Character *character2)
+{
+    return character1->distance(get_leader()) < character2->distance(get_leader());
+}
+
+void SmartTeam::sort_Team() {
+    //  std::sort(get_chTeam().begin(), get_chTeam().end(), [this](const Character* character1, const Character* character2){
+    //     return character1->distance(get_leader()) < character2->distance(get_leader());
+    //  });
 }
 
 void SmartTeam::attack(Team *other_team)
 {
-            if(other_team == nullptr){
+    if(other_team == nullptr){
         throw std::invalid_argument("Sending nullptr to the attack() method");
     }
-    sort_Team();
+    // sort_Team();
+    // std::sort(other_team->get_chTeam().begin(), other_team->get_chTeam().end(), [other_team](const Character* character1, const Character* character2) {
+    //     return character1->distance(other_team->get_leader()) < character2->distance(other_team->get_leader());
+    // });
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {
         throw runtime_error("one of the team is dead");

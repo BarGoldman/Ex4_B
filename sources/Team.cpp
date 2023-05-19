@@ -2,12 +2,14 @@
 #include <limits>
 #include <algorithm>
 
-Team::Team(Character *player) : _leader(player) 
+Team::Team(Character *player) : _leader(player)
 {
-    if(player == nullptr){
+    if (player == nullptr)
+    {
         throw std::invalid_argument("you try to add null player");
     }
-    if(player->get_inTeam() == 1){
+    if (player->get_inTeam() == 1)
+    {
         throw std::runtime_error("Appointing the same captain to different teams");
     }
     add(player);
@@ -19,7 +21,8 @@ void Team::add(Character *player)
     {
         throw std::runtime_error("A team can have at most 10 teammates");
     }
-    if(player->get_inTeam() == 1){
+    if (player->get_inTeam() == 1)
+    {
         throw std::runtime_error("Adding the same character to different teams");
     }
     _chTeam.push_back(player);
@@ -34,22 +37,9 @@ Character *Team::new_target(Team *other_team)
     {
         if (other_team->_chTeam.at(i)->isAlive() && _leader->distance(other_team->_chTeam.at(i)) < max_des)
         {
-            if (Cowboy *cowboy = dynamic_cast<Cowboy *>(other_team->_chTeam.at(i)))
-            {
-                max_des = _leader->distance(other_team->_chTeam.at(i));
-                ans = other_team->_chTeam.at(i);
-            }
-        }
-    }
-    for (size_t i = 0; i < other_team->_chTeam.size(); i++)
-    {
-        if (other_team->_chTeam.at(i)->isAlive() && _leader->distance(other_team->_chTeam.at(i)) < max_des)
-        {
-            if (Ninja *ninja = dynamic_cast<Ninja *>(other_team->_chTeam.at(i)))
-            {
-                max_des = _leader->distance(other_team->_chTeam.at(i));
-                ans = other_team->_chTeam.at(i);
-            }
+
+            max_des = _leader->distance(other_team->_chTeam.at(i));
+            ans = other_team->_chTeam.at(i);
         }
     }
     return ans;
@@ -63,31 +53,17 @@ void Team::find_newLeader()
     {
         if (_chTeam.at(i)->isAlive() && des > _leader->distance(_chTeam.at(i)))
         {
-            if (Cowboy *cowboy = dynamic_cast<Cowboy *>(_chTeam.at(i)))
-            {
-                des = _leader->distance(_chTeam.at(i));
-                count = i;
-            }
-        }
-    }
-    for (size_t i = 0; i < _chTeam.size(); i++)
-    {
-        if (_chTeam.at(i)->isAlive() && des > _leader->distance(_chTeam.at(i)))
-        {
-            if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
-            {
-                des = _leader->distance(_chTeam.at(i));
-                count = i;
-            }
+            des = _leader->distance(_chTeam.at(i));
+            count = i;
         }
     }
     _leader = _chTeam.at(count);
 }
 
-
 void Team::attack(Team *other_team)
 {
-    if(other_team == nullptr){
+    if (other_team == nullptr)
+    {
         throw std::invalid_argument("Sending nullptr to the attack() method");
     }
 

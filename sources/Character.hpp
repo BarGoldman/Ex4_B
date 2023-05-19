@@ -24,19 +24,23 @@ public:
 
     virtual ~Character(){cout<< "good dis to Character" << endl;}
 
-    bool isAlive() const;
-    double distance(const Character *player) const;
-    void hit(const int num);
-    string getName();
-    Point getLocation();
+    bool isAlive() const; //returns a boolean value is the character alive (that is, has more than zero hit points)
+    double distance(const Character *player) const; // Returns the distance between the characters
+    void hit(int num); // Gets an integer. Subtracts the appropriate amount of hit points from the character.other returns nothing.
+    string getName(); // Returns the name of the character.
+    Point getLocation(); // Returns the position of the character.
 
-    // print in the character
-    virtual string print() const;
+    
+    virtual string print() const;// print in the character 
+    //The function is virtual because in the group, we perform printing per Character
 
-    //// add by me
+
+
+
+    //////////////////////////////// Added By Myself ////////////////////////////////
     int get_hitPoints() const;
 
-    int get_inTeam(){
+    int get_inTeam() const{
         return _inTeam;
     }
 
@@ -49,6 +53,16 @@ public:
 
 
     bool operator<(const Character& other) const ;
+
+
+    // Declare the defaulted special member functions
+
+
+
+    Character(const Character&) = delete;
+    Character& operator=(const Character&) = delete;
+    Character(Character&&) = delete;
+    Character& operator=(Character&&) = delete;
 };
 
 #endif

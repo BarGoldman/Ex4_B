@@ -40,9 +40,10 @@ void Team2::find_newLeader()
     }
     setLeader(get_chTeam().at(count));
 }
+
 void Team2::attack(Team *other_team)
 {
-        if(other_team == nullptr){
+    if(other_team == nullptr){
         throw std::invalid_argument("Sending nullptr to the attack() method");
     }
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
@@ -54,7 +55,7 @@ void Team2::attack(Team *other_team)
     {
         find_newLeader();
     }
-
+    
     Character *target = new_target(other_team);
     for (size_t i = 0; i < get_chTeam().size(); i++)
     {
