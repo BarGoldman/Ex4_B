@@ -23,6 +23,7 @@ public:
 
 
 
+
     Team2(const Team2&) = delete;
     Team2& operator=(const Team2&) = delete;
     Team2(Team2&&) = delete;

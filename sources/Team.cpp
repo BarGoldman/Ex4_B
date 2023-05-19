@@ -58,6 +58,7 @@ Character *Team::new_target(Team *other_team)
 void Team::find_newLeader()
 {
     double des = std::numeric_limits<double>::max();
+    size_t count = 0;
     for (size_t i = 0; i < _chTeam.size(); i++)
     {
         if (_chTeam.at(i)->isAlive() && des > _leader->distance(_chTeam.at(i)))
@@ -65,7 +66,7 @@ void Team::find_newLeader()
             if (Cowboy *cowboy = dynamic_cast<Cowboy *>(_chTeam.at(i)))
             {
                 des = _leader->distance(_chTeam.at(i));
-                _leader = _chTeam.at(i);
+                count = i;
             }
         }
     }
@@ -76,11 +77,13 @@ void Team::find_newLeader()
             if (Ninja *ninja = dynamic_cast<Ninja *>(_chTeam.at(i)))
             {
                 des = _leader->distance(_chTeam.at(i));
-                _leader = _chTeam.at(i);
+                count = i;
             }
         }
     }
+    _leader = _chTeam.at(count);
 }
+
 
 void Team::attack(Team *other_team)
 {

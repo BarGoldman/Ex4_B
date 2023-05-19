@@ -106,30 +106,30 @@ void SmartTeam::attack(Team *other_team)
     }
 }
 
-Character *SmartTeam::new_target(Team *other_team)
-{
-    double max_des = std::numeric_limits<double>::max();
-    Character *ans = nullptr;
-    for (size_t i = 0; i < other_team->get_chTeam().size(); i++)
-    {
-        if (other_team->get_chTeam().at(i)->isAlive() && other_team->get_chTeam().at(i)->get_hitPoints() < max_des)
-        {
+// Character *SmartTeam::new_target(Team *other_team)
+// {
+//     double max_des = std::numeric_limits<double>::max();
+//     Character *ans = nullptr;
+//     for (size_t i = 0; i < other_team->get_chTeam().size(); i++)
+//     {
+//         if (other_team->get_chTeam().at(i)->isAlive() && other_team->get_chTeam().at(i)->get_hitPoints() < max_des)
+//         {
 
-            max_des = other_team->get_chTeam().at(i)->get_hitPoints();
-            ans = other_team->get_chTeam().at(i);
-        }
-    }
-    return ans;
-}
-void SmartTeam::find_newLeader()
-{
-    double des = std::numeric_limits<double>::min();
-    for (size_t i = get_chTeam().size() ; i > 0 ; i--)
-    {
-        if (get_chTeam().at(i-1)->isAlive() && des < get_chTeam().at(i-1)->get_hitPoints())
-        {
-            des = get_chTeam().at(i-1)->get_hitPoints();
-            setLeader(get_chTeam().at(i-1));
-        }
-    }
-}
+//             max_des = other_team->get_chTeam().at(i)->get_hitPoints();
+//             ans = other_team->get_chTeam().at(i);
+//         }
+//     }
+//     return ans;
+// }
+// void SmartTeam::find_newLeader()
+// {
+//     double des = std::numeric_limits<double>::min();
+//     for (size_t i = get_chTeam().size() ; i > 0 ; i--)
+//     {
+//         if (get_chTeam().at(i-1)->isAlive() && des < get_chTeam().at(i-1)->get_hitPoints())
+//         {
+//             des = get_chTeam().at(i-1)->get_hitPoints();
+//             setLeader(get_chTeam().at(i-1));
+//         }
+//     }
+// }

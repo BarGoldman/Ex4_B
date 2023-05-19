@@ -46,6 +46,8 @@ public:
     virtual Character* new_target(Team *other_team);
     virtual void find_newLeader();
 
+    // void find_newLeader();
+
     // Getter for _chTeam
     const vector<Character*>& get_chTeam() const;
 

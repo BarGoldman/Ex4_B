@@ -521,7 +521,13 @@ TEST_SUITE("Battle simulations") {
         CHECK((!team2_c2->isAlive() && team2_c1->isAlive() && team2_c3->isAlive() && team2_c4->isAlive()));
 
         // At this point, the captain should be team2_c3; hence, the next enemy to be attacked by team2 should team_c3.
+        cout << "player 1 " << team2_c1 << endl;
+        cout << "player 3 " << team2_c3 << endl;
+        cout << "player 4 " << team2_c4 << endl;
         multi_attack(6, team2, team1);
+        cout << "the dest 2 --> 1 " << team2_c2->distance(team2_c1) << endl;
+        cout << "the dest 2 --> 3 " << team2_c2->distance(team2_c3) << endl;
+        cout << "the new leader is : " << team2.get_leader() << endl;
         CHECK((!team_c3->isAlive() && team_c1->isAlive() && team_c2->isAlive()));
 
 

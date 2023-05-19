@@ -29,15 +29,16 @@ Character *Team2::new_target(Team *other_team)
 void Team2::find_newLeader()
 {
     double des = std::numeric_limits<double>::max();
+    size_t count = 0;
     for (size_t i = 0; i < get_chTeam().size(); i++)
     {
         if (get_chTeam().at(i)->isAlive() && des > get_leader()->distance(get_chTeam().at(i)))
         {
                 des = get_leader()->distance(get_chTeam().at(i));
-                setLeader(get_chTeam().at(i));
-            
+                count = i ;
         }
     }
+    setLeader(get_chTeam().at(count));
 }
 void Team2::attack(Team *other_team)
 {
