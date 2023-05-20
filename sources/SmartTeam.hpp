@@ -14,16 +14,16 @@ public:
     SmartTeam(Character* player);
     ~SmartTeam()override{};
 
-    void print() override;
+    
     void attack(Team* other_team) override;
+    void print() override;
 
+    //////////////////////////////// Added By Myself ////////////////////////////////
 
     Character* new_target(Team *other_team) override;
     void find_newLeader() override;
-    // bool compareCharacters(Character* character1,Character *character2);
-
-
     void sort_Team(Team *team);
+    Character* find_target_forNinja(Team *other_team,Character * ninja);
 
 
     SmartTeam(const SmartTeam&) = delete;

@@ -1,15 +1,6 @@
 #include "Team2.hpp"
 #include <limits>
 
-void Team2::print()
-{
-    string ans = "";
-    for (size_t i = 0; i < get_chTeam().size(); i++)
-    {
-        ans = ans + get_chTeam().at(i)->print() + " ";
-    }
-}
-
 Character *Team2::new_target(Team *other_team)
 {
     double max_des = std::numeric_limits<double>::max();
@@ -18,9 +9,8 @@ Character *Team2::new_target(Team *other_team)
     {
         if (other_team->get_chTeam().at(i)->isAlive() && get_leader()->distance(other_team->get_chTeam().at(i)) < max_des)
         {
-
-                max_des = get_leader()->distance(other_team->get_chTeam().at(i));
-                ans = other_team->get_chTeam().at(i);           
+            max_des = get_leader()->distance(other_team->get_chTeam().at(i));
+            ans = other_team->get_chTeam().at(i);
         }
     }
     return ans;
@@ -34,8 +24,8 @@ void Team2::find_newLeader()
     {
         if (get_chTeam().at(i)->isAlive() && des > get_leader()->distance(get_chTeam().at(i)))
         {
-                des = get_leader()->distance(get_chTeam().at(i));
-                count = i ;
+            des = get_leader()->distance(get_chTeam().at(i));
+            count = i;
         }
     }
     setLeader(get_chTeam().at(count));
@@ -43,7 +33,8 @@ void Team2::find_newLeader()
 
 void Team2::attack(Team *other_team)
 {
-    if(other_team == nullptr){
+    if (other_team == nullptr)
+    {
         throw std::invalid_argument("Sending nullptr to the attack() method");
     }
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
@@ -55,7 +46,7 @@ void Team2::attack(Team *other_team)
     {
         find_newLeader();
     }
-    
+
     Character *target = new_target(other_team);
     for (size_t i = 0; i < get_chTeam().size(); i++)
     {
@@ -104,5 +95,14 @@ void Team2::attack(Team *other_team)
                 }
             }
         }
+    }
+}
+
+void Team2::print()
+{
+    string ans = "";
+    for (size_t i = 0; i < get_chTeam().size(); i++)
+    {
+        ans = ans + get_chTeam().at(i)->print() + " ";
     }
 }

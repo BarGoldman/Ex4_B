@@ -20,57 +20,52 @@ SmartTeam::SmartTeam(Character *player) : Team(player)
 {
 }
 
-void SmartTeam::print()
-{
-    sort_Team(this);
-    string ans = "";
-    for (size_t i = 0; i < get_chTeam().size(); i++)
-    {
-        ans = ans + get_chTeam().at(i)->print() + " ";
-    }
-    cout << ans << endl;
-}
-
 Character *SmartTeam::new_target(Team *other_team)
 {
-    double max_des = std::numeric_limits<double>::max();
     Character *ans = nullptr;
-    for (size_t i = 0; i < other_team->get_chTeam().size(); i++)
+    size_t i = 0;
+    while (ans == nullptr && i < other_team->get_chTeam().size())
     {
-        if (other_team->get_chTeam().at(i)->isAlive() && get_leader()->distance(other_team->get_chTeam().at(i)) < max_des)
+        if (other_team->get_chTeam().at(i)->isAlive())
         {
-
-            max_des = get_leader()->distance(other_team->get_chTeam().at(i));
-            ans = other_team->get_chTeam().at(i);
+             ans = other_team->get_chTeam().at(i);
         }
+        i++;
     }
     return ans;
 }
 
 void SmartTeam::find_newLeader()
 {
-    double des = std::numeric_limits<double>::max();
-    size_t count = 0;
-    for (size_t i = 0; i < get_chTeam().size(); i++)
-    {
-        if (get_chTeam().at(i)->isAlive() && des > get_leader()->distance(get_chTeam().at(i)))
+    size_t i = get_chTeam().size();
+    while(!(get_leader()->isAlive()) && i  > 0){
+        if (get_chTeam().at(i-1)->isAlive())
         {
-            des = get_leader()->distance(get_chTeam().at(i));
-            count = i;
+            setLeader(get_chTeam().at(i-1));
         }
-    }
-    setLeader(get_chTeam().at(count));
+        i--;
+    }  
 }
-
-// bool  SmartTeam::compareCharacters(Character* character1,Character *character2)
-// {
-//     return character1->distance(get_leader()) < character2->distance(get_leader());
-// }
 
 void SmartTeam::sort_Team(Team *team) {
      std::sort(team->get_chTeam().begin(), team->get_chTeam().end(), [team](const Character* character1, const Character* character2){
-        return character1->distance(team->get_leader()) < character2->distance(team->get_leader());
+        return character1->get_hitPoints() < character2->get_hitPoints();
      });
+}
+
+Character *SmartTeam::find_target_forNinja(Team *other_team, Character * ninja)
+{
+     double max_des = std::numeric_limits<double>::max();
+     Character *ans = nullptr;
+     for (size_t i = 0; i < other_team->get_chTeam().size(); i++)
+     {
+        if (other_team->get_chTeam().at(i)->isAlive() && ninja->distance(other_team->get_chTeam().at(i)) < max_des)
+        {
+            max_des = ninja->distance(other_team->get_chTeam().at(i));
+            ans = other_team->get_chTeam().at(i);
+        }
+     }
+     return ans;
 }
 
 void SmartTeam::attack(Team *other_team)
@@ -81,15 +76,10 @@ void SmartTeam::attack(Team *other_team)
     }
     sort_Team(this);
     sort_Team(other_team);
-    // std::sort(other_team->get_chTeam().begin(), other_team->get_chTeam().end(),
-    //           [&](Character *character1, Character *character2)
-    //           {
-    //               return character1->distance(other_team->get_leader()) < character2->distance(other_team->get_leader());
-    //           });
-
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {
         throw runtime_error("one of the team is dead");
+        return;
     }
 
     if (!(get_leader()->isAlive()))
@@ -125,11 +115,12 @@ void SmartTeam::attack(Team *other_team)
             {
                 if (cowboy->hasboolets())
                 {
-
+                    cout << "shoot: " << target->getName() << endl;
                     cowboy->shoot(target);
                 }
                 else
                 {
+                    cout << "reload: " << target->getName() << endl;
                     cowboy->reload();
                 }
             }
@@ -137,41 +128,43 @@ void SmartTeam::attack(Team *other_team)
             {
                 if (ninja->distance(target) < 1)
                 {
+                    cout << "slash the real target: " << target->getName() << endl;
                     ninja->slash(target);
                 }
                 else
                 {
-                    ninja->move(target);
+                    if(other_team->stillAlive() == 1){
+                        ninja->move(target);
+                    }
+                    else
+                    {
+                        Character *Ninja_target = find_target_forNinja(other_team,ninja);
+
+                        if (ninja->distance(Ninja_target) < 1)
+                        {
+                            cout << "slash: " << Ninja_target->getName() << endl;
+                            ninja->slash(Ninja_target);
+                        }
+                        else
+                        {
+
+                            cout << "try to go: " << Ninja_target->getName() << endl;
+                            ninja->move(Ninja_target);
+                        }
+                    }
                 }
             }
         }
     }
 }
 
-// Character *SmartTeam::new_target(Team *other_team)
-// {
-//     double max_des = std::numeric_limits<double>::max();
-//     Character *ans = nullptr;
-//     for (size_t i = 0; i < other_team->get_chTeam().size(); i++)
-//     {
-//         if (other_team->get_chTeam().at(i)->isAlive() && other_team->get_chTeam().at(i)->get_hitPoints() < max_des)
-//         {
-
-//             max_des = other_team->get_chTeam().at(i)->get_hitPoints();
-//             ans = other_team->get_chTeam().at(i);
-//         }
-//     }
-//     return ans;
-// }
-// void SmartTeam::find_newLeader()
-// {
-//     double des = std::numeric_limits<double>::min();
-//     for (size_t i = get_chTeam().size() ; i > 0 ; i--)
-//     {
-//         if (get_chTeam().at(i-1)->isAlive() && des < get_chTeam().at(i-1)->get_hitPoints())
-//         {
-//             des = get_chTeam().at(i-1)->get_hitPoints();
-//             setLeader(get_chTeam().at(i-1));
-//         }
-//     }
-// }
+void SmartTeam::print()
+{
+    sort_Team(this);
+    string ans = "";
+    for (size_t i = 0; i < get_chTeam().size(); i++)
+    {
+        ans = ans + get_chTeam().at(i)->print() + " ";
+    }
+    cout << ans << endl;
+}

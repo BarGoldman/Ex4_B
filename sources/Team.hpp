@@ -42,7 +42,6 @@ public:
     void setLeader(Character* leader);    // Set _leader    
     
     vector<Character*>& get_chTeam(); // get _chTeam
-    void set_chTeam(const vector<Character*>& chTeam); // set _chTeam
 
 
 

@@ -97,9 +97,9 @@ void Team::attack(Team *other_team)
     }
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {
+        return;
         throw runtime_error("one of the team is dead");
     }
-
     if (!(_leader->isAlive()))
     {
         find_newLeader();
@@ -215,29 +215,19 @@ void Team::print()
     cout << ans << endl;
 }
 
-
-
 Character *Team::get_leader() const
 {
     return _leader;
 }
 
-// Getter for _chTeam
-vector<Character *>& Team::get_chTeam()
-{
-    return _chTeam;
-}
-
-// Setter for _chTeam
-void Team::set_chTeam(const vector<Character *> &chTeam)
-{
-    _chTeam = chTeam;
-}
-
-// Setter for _leader
 void Team::setLeader(Character *leader)
 {
     _leader = leader;
+}
+
+vector<Character *>& Team::get_chTeam()
+{
+    return _chTeam;
 }
 
 Team::~Team()
