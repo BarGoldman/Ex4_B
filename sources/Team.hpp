@@ -43,14 +43,7 @@ public:
     
     vector<Character*>& get_chTeam(); // get _chTeam
 
-
-
-
-
-
-
-
-
+    //////////////////////////////// for distrctor ////////////////////////////////
     Team(const Team&) = delete;
     Team& operator=(const Team&) = delete;
     Team(Team&&) = delete;

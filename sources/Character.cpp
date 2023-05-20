@@ -73,14 +73,3 @@ void Character::set_location(const Point &new_point)
 
 
 
-
-
-
-
-
-
-bool Character::operator<(const Character& other) const {
-    return(_hitPoints < other._hitPoints);
-}
-
-

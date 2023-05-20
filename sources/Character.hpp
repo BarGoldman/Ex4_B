@@ -21,8 +21,7 @@ private:
 
 public:
     Character(string name, Point location, int hit);
-
-    virtual ~Character(){};
+    virtual ~Character() = default;
 
     bool isAlive() const; //returns a boolean value is the character alive (that is, has more than zero hit points)
     double distance(const Character *player) const; // Returns the distance between the characters
@@ -45,14 +44,6 @@ public:
     void set_inTeam();// Updates 1 to the ingroup if he joined the group
     
     void set_location(const Point& new_point); // Updates the player's location
-
-
-
-
-
-    bool operator<(const Character& other) const ; 
-
-    // Declare the defaulted special member functions
 
     Character(const Character&) = delete;
     Character& operator=(const Character&) = delete;

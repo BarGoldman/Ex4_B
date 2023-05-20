@@ -25,7 +25,7 @@ public:
     void sort_Team(Team *team);
     Character* find_target_forNinja(Team *other_team,Character * ninja);
 
-
+    //////////////////////////////// for distrctor ////////////////////////////////
     SmartTeam(const SmartTeam&) = delete;
     SmartTeam& operator=(const SmartTeam&) = delete;
     SmartTeam(SmartTeam&&) = delete;

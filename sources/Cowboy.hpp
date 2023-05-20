@@ -16,7 +16,6 @@ private:
 
 public:
     Cowboy(string name, Point location);
-    ~Cowboy()override{};
 
 
     //If the Cowboy is not dead and has bullets left,     
@@ -31,12 +30,6 @@ public:
 
 
     string print() const override;
-
-
-    Cowboy(const Cowboy&) = delete;
-    Cowboy& operator=(const Cowboy&) = delete;
-    Cowboy(Cowboy&&) = delete;
-    Cowboy& operator=(Cowboy&&) = delete;
 };
 
 #endif

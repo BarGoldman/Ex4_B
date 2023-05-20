@@ -21,11 +21,7 @@ public:
     Character* new_target(Team *other_team) override;
     void find_newLeader() override;
 
-
-
-
-
-
+    //////////////////////////////// for distrctor ////////////////////////////////
     Team2(const Team2&) = delete;
     Team2& operator=(const Team2&) = delete;
     Team2(Team2&&) = delete;
