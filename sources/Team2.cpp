@@ -37,11 +37,13 @@ void Team2::attack(Team *other_team)
     {
         throw std::invalid_argument("Sending nullptr to the attack() method");
     }
-    if (other_team->stillAlive() < 1 || stillAlive() < 1)
+    if (!(other_team->stillAlive()))
     {
-        throw runtime_error("one of the team is dead");
+        throw runtime_error("other_team is dead");
     }
-
+    if(!(stillAlive())){
+        throw runtime_error("team is dead");
+    }
     if (!(get_leader()->isAlive()))
     {
         find_newLeader();
@@ -51,7 +53,7 @@ void Team2::attack(Team *other_team)
     for (size_t i = 0; i < get_chTeam().size(); i++)
     {
 
-        if (other_team->stillAlive() < 1 || stillAlive() < 1)
+        if (!(other_team->stillAlive()))
         {
             break;
         }
