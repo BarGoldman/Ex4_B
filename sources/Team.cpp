@@ -215,13 +215,15 @@ void Team::print()
     cout << ans << endl;
 }
 
+
+
 Character *Team::get_leader() const
 {
     return _leader;
 }
 
 // Getter for _chTeam
-const vector<Character *> &Team::get_chTeam() const
+vector<Character *>& Team::get_chTeam()
 {
     return _chTeam;
 }
@@ -245,3 +247,4 @@ Team::~Team()
         delete _chTeam.at(i);
     }
 }
+

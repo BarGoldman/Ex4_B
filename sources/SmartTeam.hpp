@@ -20,10 +20,10 @@ public:
 
     Character* new_target(Team *other_team) override;
     void find_newLeader() override;
-    bool compareCharacters(Character* character1,Character *character2);
+    // bool compareCharacters(Character* character1,Character *character2);
 
-    void sort_Team();
 
+    void sort_Team(Team *team);
 
 
     SmartTeam(const SmartTeam&) = delete;

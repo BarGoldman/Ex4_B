@@ -41,7 +41,7 @@ public:
     Character* get_leader() const;     // get  _leader  
     void setLeader(Character* leader);    // Set _leader    
     
-    const vector<Character*>& get_chTeam() const; // get _chTeam
+    vector<Character*>& get_chTeam(); // get _chTeam
     void set_chTeam(const vector<Character*>& chTeam); // set _chTeam
 
 
