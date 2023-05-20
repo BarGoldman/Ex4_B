@@ -97,7 +97,6 @@ void Team::attack(Team *other_team)
     }
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {
-        return;
         throw runtime_error("one of the team is dead");
     }
     if (!(_leader->isAlive()))
@@ -114,7 +113,7 @@ void Team::attack(Team *other_team)
 
         if (other_team->stillAlive() < 1 || stillAlive() < 1)
         {
-            break;
+            throw runtime_error("one of the team is dead");
         }
         if (!(_leader->isAlive()))
         {

@@ -3,16 +3,27 @@
 #include <algorithm>
 
 /*
-Attack - The attacking team will choose a target with a minimal number of hit points each time.
-The goal is to silence the opposing team by eliminating weak players,
-thereby reducing the number of players who can attack them back (an algorithm idea from Algorithms 1 course).
+The main implementation of SmartTeam:
 
-Choosing a leader for the team - Each time the leader is no longer alive,
-the leader with the highest impact points in the group will be selected.
-This ensures that we have a strong and resilient leader who will protect the team members."
+approach is to neutralize as many members of the opposing team as possible, 
+thereby reducing the number of attacks against the attacking team.
 
-Printing according to hit points.
+First, I sorted both the attacking and defending teams based on the hits points. 
+I searched for the leader of the attacking team with the highest hit points and the 
+target with the lowest hit points.
 
+During each attack, I over the members of the attacking team. If the member is a cowboy 
+they directly attack the target because their position doesn't matter.
+
+However, if the member of the attacking team is a "Ninja," 
+I first check if they can attact the target with the minimum highest hit. If not, 
+I choose another target from the defending team who is closer to the Ninja than other members of the opposing team. 
+This target becomes the new objective for the Ninja.
+If the Ninja encounters the initially chosen target on the way to the new objective, 
+they will assist their team members in neutralizing the target; 
+otherwise, they continue on their path towards the new objective.
+
+The idea came to me from Algorithms-1 course
 
 */
 
@@ -79,7 +90,6 @@ void SmartTeam::attack(Team *other_team)
     if (other_team->stillAlive() < 1 || stillAlive() < 1)
     {
         throw runtime_error("one of the team is dead");
-        return;
     }
 
     if (!(get_leader()->isAlive()))
@@ -97,7 +107,6 @@ void SmartTeam::attack(Team *other_team)
         }
         if (!(get_leader()->isAlive()))
         {
-
             find_newLeader();
         }
 
@@ -115,12 +124,10 @@ void SmartTeam::attack(Team *other_team)
             {
                 if (cowboy->hasboolets())
                 {
-                    cout << "shoot: " << target->getName() << endl;
                     cowboy->shoot(target);
                 }
                 else
                 {
-                    cout << "reload: " << target->getName() << endl;
                     cowboy->reload();
                 }
             }
@@ -128,7 +135,6 @@ void SmartTeam::attack(Team *other_team)
             {
                 if (ninja->distance(target) < 1)
                 {
-                    cout << "slash the real target: " << target->getName() << endl;
                     ninja->slash(target);
                 }
                 else
@@ -142,13 +148,10 @@ void SmartTeam::attack(Team *other_team)
 
                         if (ninja->distance(Ninja_target) < 1)
                         {
-                            cout << "slash: " << Ninja_target->getName() << endl;
                             ninja->slash(Ninja_target);
                         }
                         else
                         {
-
-                            cout << "try to go: " << Ninja_target->getName() << endl;
                             ninja->move(Ninja_target);
                         }
                     }

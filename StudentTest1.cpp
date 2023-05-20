@@ -434,7 +434,6 @@ TEST_SUITE("Battle related methods") {
 TEST_SUITE("Battle simulations") {
 
     auto multi_attack = [](int n, Team &attacker, Team &defender) {
-        cout<< "we start: " << endl;
         for (int i = 0; i < n; i++) {
             if (defender.stillAlive()) {
                 attacker.attack(&defender);
@@ -480,7 +479,6 @@ TEST_SUITE("Battle simulations") {
         multi_attack(2, team, team2);
         CHECK_FALSE(trained_ninja->isAlive()); // Trained ninja should be dead
         CHECK((!old_ninja->isAlive() && young_ninja2->isAlive()));
-
 
         multi_attack(4, team, team2);
         CHECK_FALSE(old_ninja->isAlive()); // Old ninja should be dead
